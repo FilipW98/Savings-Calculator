@@ -1,3 +1,3 @@
-<div align="center"> 
-  # SavingsCalculator  
-</div>
+<h1 align="center"> 
+  SavingsCalculator  
+</h1>
