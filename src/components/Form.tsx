@@ -1,27 +1,57 @@
-export default function Form() {
+import { FormProps } from '../types';
+
+
+function convertToCamelCase(str: string) {
+	return str.replace(/-([a-z])/g, match => match[1].toUpperCase());
+}
+
+
+
+export default function Form({ onDataHandler, setFormData }: FormProps) {
+	function inputHandler(event: React.ChangeEvent<HTMLInputElement>) {
+		const { id, value } = event.target;
+
+		const camelCaseId = convertToCamelCase(id);
+
+		
+		const updatedValue = parseFloat(value);
+
+		setFormData(prevData => {
+			if (prevData) {
+				return {
+					...prevData,
+					[camelCaseId]: updatedValue,
+				};
+			} else {
+			
+				return { initialInvestment: 0, annualInvestment: 0, expectedReturn: 0, duration: 0 };
+			}
+		});
+	}
+
 	return (
-		<div className='' id='user-input'>
+		<form id='user-input'>
 			<div className='input-group'>
 				<p>
 					<label htmlFor='initial-investment'>Initial investment</label>
-					<input type='text' id='initial-investment' />
+					<input onChange={inputHandler} type='number' id='initial-investment' />
 				</p>
 				<p>
 					<label htmlFor='annual-investment'>Annual Investment</label>
-					<input type='text' id='annual-investment' />
+					<input onChange={inputHandler} type='number' id='annual-investment' />
 				</p>
 			</div>
 
 			<div className='input-group'>
 				<p>
 					<label htmlFor='expected-return'>Expected return</label>
-					<input type='text' id='expected-return' />
+					<input onChange={inputHandler} type='number' id='expected-return' />
 				</p>
 				<p>
 					<label htmlFor='duration'>Duration</label>
-					<input type='text' id='duration' />
+					<input onChange={inputHandler} type='number' id='duration' />
 				</p>
 			</div>
-		</div>
+		</form>
 	);
 }
