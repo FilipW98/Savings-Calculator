@@ -1,19 +1,13 @@
 import { FormProps } from '../types';
 
-
 function convertToCamelCase(str: string) {
 	return str.replace(/-([a-z])/g, match => match[1].toUpperCase());
 }
 
-
-
-export default function Form({ onDataHandler, setFormData }: FormProps) {
+export default function Form({setFormData }: FormProps) {
 	function inputHandler(event: React.ChangeEvent<HTMLInputElement>) {
 		const { id, value } = event.target;
-
 		const camelCaseId = convertToCamelCase(id);
-
-		
 		const updatedValue = parseFloat(value);
 
 		setFormData(prevData => {
@@ -23,7 +17,6 @@ export default function Form({ onDataHandler, setFormData }: FormProps) {
 					[camelCaseId]: updatedValue,
 				};
 			} else {
-			
 				return { initialInvestment: 0, annualInvestment: 0, expectedReturn: 0, duration: 0 };
 			}
 		});

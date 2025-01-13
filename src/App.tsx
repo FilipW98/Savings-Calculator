@@ -5,22 +5,19 @@ import Table from './components/Table';
 import { FormInputData } from './types';
 
 
-
-
-
 function App() {
 
-  const [formData, setFormData] = useState<FormInputData | null>(null); ;
-
-	function dataHandler(data: FormInputData) {
-		console.log('Dane z formularza: ', data);
-	 
-	}
+	const [formData, setFormData] = useState<FormInputData | null>({
+		initialInvestment: 0,
+		expectedReturn: 0,
+		annualInvestment: 0,
+		duration: 1,
+	}); ;
 
   return (
 		<>
 			<Header />
-			<Form onDataHandler={dataHandler} setFormData={setFormData} />
+			<Form  setFormData={setFormData} />
 			<Table formData={formData} />
 		</>
 	);

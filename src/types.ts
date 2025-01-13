@@ -11,6 +11,5 @@ export interface TableProps {
 }
 
 export interface FormProps {
-	onDataHandler: (data: FormInputData) => void;
 	setFormData: React.Dispatch<React.SetStateAction<FormInputData | null>>;
 }

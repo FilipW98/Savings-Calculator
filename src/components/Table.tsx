@@ -1,16 +1,34 @@
 import { TableProps } from '../types';
 import { formatter } from '../util/investment';
 
-
 export default function Table({ formData }: TableProps) {
+	let initialInvestment = Number(formData?.initialInvestment ?? 0);
+	let expectedReturn = Number(formData?.expectedReturn ?? 0);
+	let annualInvestment = Number(formData?.annualInvestment ?? 0);
+	let duration = Number(formData?.duration ?? 1);
 
+	const rows = [];
+	let totalInterest = 0;
+	let investedCapital = initialInvestment;
+	let investmentValue = investedCapital;
 
-	const initialInvestment = formatter.format(formData?.initialInvestment ?? 0);
-	const annualInvestment = formatter.format(formData?.annualInvestment ?? 0);
-	const expectedReturn = formatter.format(formData?.expectedReturn ?? 0);
-	const duration = formatter.format(formData?.duration ?? 0);
+	for (let year = 1; year <= duration; year++) {
+		const interestYear = investedCapital * (expectedReturn / 100);
+		totalInterest += interestYear;
+		investedCapital += annualInvestment;
+		investmentValue = investedCapital + totalInterest;
 
-	
+		rows.push(
+			<tr key={year}>
+				<th>{year}</th>
+				<td>{formatter.format(investmentValue)}</td>
+				<td>{formatter.format(interestYear)}</td>
+				<td>{formatter.format(totalInterest)}</td>
+				<td>{formatter.format(investedCapital)}</td>
+			</tr>
+		);
+	}
+
 	return (
 		<table id='result'>
 			<thead>
@@ -23,13 +41,7 @@ export default function Table({ formData }: TableProps) {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th>1</th>
-					<td>{formData ? initialInvestment : '0'}</td>
-					<td>{formData ? annualInvestment : '0'}</td>
-					<td>{formData ? expectedReturn : '0'}</td>
-					<td>{formData ? duration : '0'}</td>
-				</tr>
+				{rows}
 			</tbody>
 		</table>
 	);
