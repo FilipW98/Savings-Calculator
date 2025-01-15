@@ -53,6 +53,10 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+
+@media(max-width:350px){
+  font-size: 0.6rem;
+}
 }
 
 #user-input input {
@@ -72,17 +76,31 @@ body {
   table-layout: fixed;
   border-spacing: 1rem;
   text-align: right;
+   @media(max-width:350px){
+    padding: 0;
+    }
 }
 
 #result thead {
   font-size: 0.8rem;
   color: #83e6c0;
+  @media(max-width:350px){
+      font-size: 0.7rem;
+    }
 }
 
 #result tbody {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 0.85rem;
   color: #c2e9e0;
+  
+  tr{
+    @media(max-width:350px){
+      text-align: center;
+      font-size: 0.7rem;
+
+    }
+  }
 }
 
 .center {
