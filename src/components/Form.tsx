@@ -4,7 +4,8 @@ function convertToCamelCase(str: string) {
 	return str.replace(/-([a-z])/g, match => match[1].toUpperCase());
 }
 
-export default function Form({setFormData }: FormProps) {
+export default function Form({ setFormData }: FormProps) {
+	
 	function inputHandler(event: React.ChangeEvent<HTMLInputElement>) {
 		const { id, value } = event.target;
 		const camelCaseId = convertToCamelCase(id);
@@ -20,6 +21,7 @@ export default function Form({setFormData }: FormProps) {
 				return { initialInvestment: 0, annualInvestment: 0, expectedReturn: 0, duration: 0 };
 			}
 		});
+
 	}
 
 	return (

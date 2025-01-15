@@ -12,13 +12,17 @@ function App() {
 		expectedReturn: 0,
 		annualInvestment: 0,
 		duration: 1,
-	}); ;
+	});;
+
+	const durationIsValid = formData && formData.duration >= 1;
 
   return (
 		<>
 			<Header />
-			<Form  setFormData={setFormData} />
-			<Table formData={formData} />
+			<Form setFormData={setFormData} />
+			{!durationIsValid && <p id='error'>Make sure duration is greater than 0.</p>}
+		  {durationIsValid && <Table formData={formData} />}
+			
 		</>
 	);
 }

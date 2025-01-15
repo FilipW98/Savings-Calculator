@@ -8,15 +8,15 @@ export default function Table({ formData }: TableProps) {
 	let duration = Number(formData?.duration ?? 1);
 
 	const rows = [];
-	let totalInterest = 0;
+
 	let investedCapital = initialInvestment;
-	let investmentValue = investedCapital;
+	let totalInterest = 0;
 
 	for (let year = 1; year <= duration; year++) {
 		const interestYear = investedCapital * (expectedReturn / 100);
 		totalInterest += interestYear;
+		const investmentValue = investedCapital + totalInterest;
 		investedCapital += annualInvestment;
-		investmentValue = investedCapital + totalInterest;
 
 		rows.push(
 			<tr key={year}>
@@ -40,9 +40,7 @@ export default function Table({ formData }: TableProps) {
 					<th>Invested Capital</th>
 				</tr>
 			</thead>
-			<tbody>
-				{rows}
-			</tbody>
+			<tbody>{rows}</tbody>
 		</table>
 	);
 }
